@@ -1,0 +1,19 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar-brand>
+      <a class="navbar-brand" href="">Palito</a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link waves-light" routerLink="/flights" mdbWavesEffect><i class="fa fa-plane"></i> Vuelos <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" routerLink="/packages" mdbWavesEffect><i class="fa fa-dollar"></i> Cotizar Paquetes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" routerLink="/login" mdbWavesEffect *ngIf="currentUser"><i class="fa fa-user"></i></a>
+            <a class="nav-link waves-light" mdbWavesEffect *ngIf="!currentUser" data-toggle="modal" data-target="#modalLogin" (click)="openLoginModal('modalLogin');"><i class="fa fa-user"></i></a>
+        </li>
+    </ul>
+  </links>
+</mdb-navbar>
