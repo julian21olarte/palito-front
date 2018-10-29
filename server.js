@@ -5,13 +5,13 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({credentials: true, origin: '*'}));
+//app.use(cors({credentials: true, origin: '*'}));
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/palito-front'));
+app.use(express.static(__dirname + '/dist'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/palito-front/index.html'));
+res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
