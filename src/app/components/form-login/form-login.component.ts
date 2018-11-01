@@ -1,5 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-login',
@@ -9,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class FormLoginComponent implements OnInit {
 
   public user: any;
-  constructor(public authService: AuthService) {
+  private hide: boolean;
+  constructor(public authService: AuthService, public router: Router) {
+    this.hide = true;
     this.user = {
       username: '',
       password: ''
@@ -21,8 +24,7 @@ export class FormLoginComponent implements OnInit {
 
 
   public loginUser() {
-    this.authService.login(this.user)
-      .subscribe(response => console.log(response));
+    this.authService.login(this.user);
   }
 
 }

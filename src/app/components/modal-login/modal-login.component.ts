@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { ModalService } from './../../services/modal.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-modal-login',
@@ -8,19 +10,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ModalLoginComponent implements OnInit {
 
-  private modalId: String;
+  private modalId: string;
   @ViewChild('modalLogin') modal: any;
-  constructor(private modalService: ModalService) {
-    this.modalId = 'modalLogin';
-    this.modalService.registerModal(this.modalId)
-      .subscribe((isOpen: Boolean) => this.openModal(isOpen));
+  constructor(
+    private modalService: ModalService,
+    private dialogRef: MatDialogRef<ModalLoginComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router) {
+
   }
 
   ngOnInit() {
   }
 
   public openModal(isOpen: Boolean) {
-    isOpen ? this.modal.show() : this.modal.close();
   }
 
 }

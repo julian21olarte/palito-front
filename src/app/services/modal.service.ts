@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -6,24 +7,25 @@ import { Subject } from 'rxjs';
 })
 export class ModalService {
 
-  private modals: Array<any>;
-  constructor() {
-    this.modals = [];
+  constructor(public dialog: MatDialog) {
   }
 
-  public registerModal(modalId: String) {
-    const subjectModal = {id: modalId, subject: new Subject()};
-    this.modals.push(subjectModal);
-    return subjectModal.subject.asObservable();
+  public openModal(modalComponent: any, data: any = null) {
+    // console.log(this.modals);
+    // const modal = this.modals.find(data => data.id === modalId);
+    // this.showModal(modal.subject as Subject<any>);
+    console.log('DIALOG');
+    const dialogRef = this.dialog.open(modalComponent, {
+      width: '60vw',
+      height: '50vh',
+      disableClose: true,
+      hasBackdrop: true,
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  public openModal(modalId: String) {
-    console.log(this.modals);
-    const modal = this.modals.find(data => data.id === modalId);
-    this.showModal(modal.subject as Subject<any>);
-  }
-
-  private showModal(modal: Subject<any>) {
-    modal.next(true);
-  }
 }

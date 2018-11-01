@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalLoginComponent } from '../modal-login/modal-login.component';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +12,23 @@ export class HeaderComponent implements OnInit {
 
   private currentUser: any;
   @ViewChild('modalLogin') modalLogin: any;
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.getCurrentUser()
+      .subscribe(user => {
+        this.currentUser = user;
+        console.log('HEADER: ', this.currentUser);
+      });
   }
 
 
-  public openLoginModal(modalId: String) {
-    this.modalService.openModal(modalId);
+  public openLoginModal() {
+    this.modalService.openModal(ModalLoginComponent);
+  }
+
+  public logout() {
+    this.authService.logout();
   }
 
 }

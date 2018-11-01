@@ -1,0 +1,17 @@
+<div class="container">
+    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+      <div class="row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxFlexFill >
+        <app-pay-detail fxFlex="1 1 100%" *ngIf="reservation" [reservation]="reservation"></app-pay-detail>
+      </div>
+      <div class="row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxFlexFill >
+        <mat-tab-group dynamicHeight fxFlex="1 1 100%">
+          <mat-tab label="Pay Card">
+              <app-pay-card-form *ngIf="reservation" [reservation] = "reservation"></app-pay-card-form>
+          </mat-tab>
+          <mat-tab label="Pay Transfer">
+              <app-pay-transfer-form *ngIf="reservation" [reservation] = "reservation"></app-pay-transfer-form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+</div>

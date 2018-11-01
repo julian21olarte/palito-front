@@ -1,4 +1,8 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
+import { ReservationService } from 'src/app/services/reservation.service';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-searcher',
@@ -7,9 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearcherComponent implements OnInit {
 
-  constructor() { }
+  public reservationCode: string;
+  private errorMessage: any;
+  constructor(public reservationService: ReservationService, private router: Router) {
+    this.reservationCode = '';
+    this.errorMessage = {
+      error: true,
+      message: ''
+    };
+  }
 
   ngOnInit() {
+  }
+
+  public getReservation() {
+    console.log(this.reservationCode);
+    this.reservationService.getReservationByCode(this.reservationCode)
+      .pipe(
+        catchError(error => {
+          console.log(error);
+          return of(error);
+        })
+      )
+      .subscribe(reservation => {
+        console.log(reservation);
+        if (reservation) {
+          if (!reservation.ok && reservation.status === 404) {
+            this.errorMessage.error = true;
+            this.errorMessage.message = reservation.error.message;
+          } else {
+            this.reservationService.setCurrentReservation(reservation);
+            this.router.navigate(['/payer']);
+          }
+        }
+      });
   }
 
 }

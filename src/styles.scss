@@ -1,13 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-/*body, .container {
+body, .container {
   margin: 0 auto;
 }
-
 .container {
-  padding-top: 10vh;
-}*/
+  margin: 0 auto;  
+  padding: 15px;
+  min-height: 80vh;
+  margin-top: 64px;
+}
 i.fa {
   font-size: 16px;
+}
+mat-card {
+  width: 70%;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form > * {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
 }

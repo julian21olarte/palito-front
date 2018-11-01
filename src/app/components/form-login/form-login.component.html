@@ -1,22 +1,22 @@
-<form class="text-center border border-light p-5">
-  <p class="h4 mb-4">Login</p>
-
-  <div class="md-form">
-    <input mdbInputDirective type="text" name="username" class="form-control" [(ngModel)]="user.username">
-    <label for="username" class="">Username</label>
-  </div>
-
-  <div class="md-form">
-    <input mdbInputDirective type="password" name="password" class="form-control" [(ngModel)]="user.password">
-    <label for="password" class="">Password</label>
-  </div>
-
-  <div class="row">
-    <div class="col-12 col-md-6 d-flex align-items-center justify-content-center mb-3 mb-md-0">
-      <a href="#">Forgot password?</a>
-    </div>
-    <div class="col-12 col-md-6">
-      <button mdbBtn color="indigo" type="button" (click) = "loginUser();">Login</button>
-    </div>
-  </div>
-</form>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+  <mat-card>
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field>
+            <input matInput placeholder="Username" name="username" [(ngModel)]="user.username">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)="loginUser()">Login</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+</div>

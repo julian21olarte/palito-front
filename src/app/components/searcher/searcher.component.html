@@ -1,18 +1,22 @@
-<div class="row">
-  <div class="col-12 col-md-6 offset-md-3">
-    <form class="text-center border border-light p-5">
-        <p class="h4 mb-4">Pedidos</p>
-  
-        <div class="md-form">
-          <input mdbInputDirective type="number" id="search" class="form-control">
-          <label for="search" class="">Ingrese el número de su pedido</label>
-        </div>
-
-        <div class="row">
-          <div class="col-12 d-flex justify-content-center">
-            <button mdbBtn color="indigo" type="submit" mdbWavesEffect>Pagar</button>
+<div class="container">
+  <div class="row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Pedidos</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field>
+            <input matInput placeholder="Numero de pedido" name="username" [(ngModel)]="reservationCode">
+          </mat-form-field>
+          <span class="error" *ngIf="errorMessage.error">{{errorMessage.message}}</span>
+    
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)="getReservation()">Pagar</button>
           </div>
-        </div>
-    </form>
+        </form>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

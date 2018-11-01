@@ -1,0 +1,72 @@
+<div class="row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pago con tarjeta</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+  
+        <mat-form-field>
+          <mat-select placeholder="Tipo de tarjeta" required [(ngModel)]="pay.card_type" name="type">
+            <mat-option [value]="'Debito'">Débito</mat-option>
+            <mat-option [value]="'Credito'">Crédito</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select placeholder="Franquicia" required [(ngModel)]="pay.card_franchise" name="franchise">
+            <mat-option [value]="'Master'">Master</mat-option>
+            <mat-option [value]="'Visa'">Visa</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select placeholder="Banco" required [(ngModel)]="pay.bank_name" name="bank">
+            <mat-option [value]="'Banco ABC'">Banco ABC</mat-option>
+            <mat-option [value]="'banco de la alegria'">Banco de la alegria</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Numero de la tarjeta" name="number" [type]="hide ? 'password' : 'text'" required [(ngModel)]="pay.card_number">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Código (CCV)" name="ccv" [type]="hideCCV ? 'password' : 'text'" required [(ngModel)]="pay.ccv_code">
+          <mat-icon matSuffix (click)="hideCCV = !hideCCV">{{hideCCV ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="expired" name="expired_date" required [(ngModel)]="pay.expired_date">
+          <mat-datepicker-toggle matSuffix [for]="expired"></mat-datepicker-toggle>
+          <mat-datepicker #expired></mat-datepicker>
+        </mat-form-field>
+  
+        <h3>Titular de la tarjeta</h3>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Nombre" name="name" [type]="'text'" required [(ngModel)]="pay.client_name">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Cedula" name="document" [type]="'number'" required [(ngModel)]="pay.client_document">
+        </mat-form-field>
+  
+        <h3>Observaciones</h3>
+        <br>
+        <mat-form-field>
+          <textarea matInput placeholder="Observations" [(ngModel)]="pay.observations" name="observations"></textarea>
+        </mat-form-field>
+  
+        <div class="button-row">
+          <button mat-raised-button color="primary" (click)="sendPay()">Pagar</button>
+        </div>
+      </form>
+  
+  
+    </mat-card-content>
+  </mat-card>
+</div>
