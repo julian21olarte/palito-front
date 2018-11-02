@@ -48,12 +48,10 @@ import { SuccessPayComponent } from './components/success-pay/success-pay.compon
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
+        tokenGetter: function() {
           return localStorage.getItem('id_token');
         },
         whitelistedDomains: [environment.api_domain],
-        // blacklistedRoutes: ['localhost:3001/auth/']
-        // skipWhenExpired: true
       }
     })
   ],
