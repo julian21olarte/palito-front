@@ -21,7 +21,9 @@ import { PayTransferFormComponent } from './components/pay-transfer-form/pay-tra
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SuccessPayComponent } from './components/success-pay/success-pay.component';
 
-
+export function tokenGetter() {
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -48,9 +50,7 @@ import { SuccessPayComponent } from './components/success-pay/success-pay.compon
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function() {
-          return localStorage.getItem('id_token');
-        },
+        tokenGetter: tokenGetter,
         whitelistedDomains: [environment.api_domain],
       }
     })
