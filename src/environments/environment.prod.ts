@@ -4,9 +4,8 @@ export const environment = {
     WebAuthConfig: {
       clientID: 'ijlsg7NpDCuwZuOjXAmkzRzxyh9jgsRH',
       domain: 'palito-1.auth0.com',
-      scope: 'openid user_metadata',
+      scope: 'openid profile email user_metadata',
       responseType: 'token id_token'
-      // scope: 'openid profile email'
     },
     connection: 'Username-Password-Authentication'
   },
