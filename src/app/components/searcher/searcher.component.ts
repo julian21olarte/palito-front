@@ -25,16 +25,13 @@ export class SearcherComponent implements OnInit {
   }
 
   public getReservation() {
-    console.log(this.reservationCode);
     this.reservationService.getReservationByCode(this.reservationCode)
       .pipe(
         catchError(error => {
-          console.log(error);
           return of(error);
         })
       )
       .subscribe(reservation => {
-        console.log(reservation);
         if (reservation) {
           if (!reservation.ok && reservation.status === 404) {
             this.errorMessage.error = true;

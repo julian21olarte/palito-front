@@ -11,7 +11,12 @@ export class FormLoginComponent implements OnInit {
 
   public user: any;
   private hide: boolean;
+  private errorMessage: any;
   constructor(public authService: AuthService, public router: Router) {
+    this.errorMessage = {
+      error: false,
+      message: 'Sorry, invalid username or password.'
+    };
     this.hide = true;
     this.user = {
       username: '',
@@ -24,7 +29,13 @@ export class FormLoginComponent implements OnInit {
 
 
   public loginUser() {
-    this.authService.login(this.user);
+    this.authService.login(this.user, (err, response) => {
+      if (err) {
+        this.errorMessage.error = true;
+      } else {
+        this.errorMessage.error = false;
+      }
+    });
   }
 
 }

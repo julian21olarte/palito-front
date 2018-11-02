@@ -5,16 +5,17 @@
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <form>
+        <form #form="ngForm">
           <mat-form-field>
-            <input matInput placeholder="Username" name="username" [(ngModel)]="user.username">
+            <input matInput placeholder="Username" required name="username" [(ngModel)]="user.username">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Password" name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
+            <input matInput placeholder="Password" required name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
+          <span class="error" *ngIf="errorMessage.error">{{errorMessage.message}}</span>
           <div class="button-row">
-            <button mat-raised-button color="primary" (click)="loginUser()">Login</button>
+            <button mat-raised-button color="primary" (click)="loginUser()" [disabled] = "form.invalid">Login</button>
           </div>
         </form>
       </mat-card-content>

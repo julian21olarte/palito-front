@@ -14,9 +14,7 @@ export class PayerComponent implements OnInit {
   public pay: any;
   constructor(private reservationService: ReservationService, private router: Router) {
     this.reservation = this.reservationService.getCurrentReservation();
-    console.log(this.reservation);
     if (!this.reservation) {
-      // TODO: show message error before navigate to searcher again
       this.router.navigate(['/search']);
     }
   }

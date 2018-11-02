@@ -10,7 +10,6 @@ export const environment = {
       domain: 'palito-1.auth0.com',
       scope: 'openid profile email user_metadata',
       responseType: 'token id_token'
-      // scope: 'openid profile email'
     },
     connection: 'Username-Password-Authentication'
   },

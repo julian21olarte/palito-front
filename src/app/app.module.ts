@@ -19,6 +19,7 @@ import { PayDetailComponent } from './components/pay-detail/pay-detail.component
 import { PayCardFormComponent } from './components/pay-card-form/pay-card-form.component';
 import { PayTransferFormComponent } from './components/pay-transfer-form/pay-transfer-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SuccessPayComponent } from './components/success-pay/success-pay.component';
 
 
 
@@ -34,7 +35,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     PayerComponent,
     PayDetailComponent,
     PayCardFormComponent,
-    PayTransferFormComponent
+    PayTransferFormComponent,
+    SuccessPayComponent
   ],
   imports: [
     BrowserModule,

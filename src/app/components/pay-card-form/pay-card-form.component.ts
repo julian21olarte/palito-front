@@ -1,7 +1,10 @@
+import { PayService } from './../../services/pay.service';
+import { Subject } from 'rxjs';
 import { PayCard } from './../../interfaces/pay-card.interface';
 import { Pay } from './../../interfaces/pay.interface';
 import { Reservation } from './../../interfaces/reservation.interface';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pay-card-form',
@@ -14,9 +17,10 @@ export class PayCardFormComponent implements OnInit {
   private pay: PayCard;
   private hide: boolean;
   private hideCCV: boolean;
-  constructor() {
-    console.log(this.reservation);
+  private conditions: boolean;
+  constructor(private payService: PayService, private router: Router) {
     this.hide = this.hideCCV = true;
+    this.conditions = false;
   }
 
   ngOnInit() {
@@ -24,9 +28,11 @@ export class PayCardFormComponent implements OnInit {
       bank_name: '',
       card_number: '',
       card_type: '',
+      reservation_id: this.reservation._id,
       client_id: this.reservation.client_id,
       code: this.reservation.code,
       description: '',
+      subject: '',
       intermediary_provider_id: this.reservation.intermediary_provider_id,
       pay_date: new Date(),
       provider_id: this.reservation.provider_id,
@@ -48,17 +54,21 @@ export class PayCardFormComponent implements OnInit {
   public sendPay() {
     this.pay.pay_date = new Date();
     this.pay.description =
-    `La siguiente reserva fue pagada y
-      requiere que procese el pago con
-      tarjeta.
-      Para consultar información de la
-      reserva puede utilizar:
-      * Identificador de reserva
-      interno: ${this.pay.code}
+    `La siguiente reserva fue pagada y requiere que procese el pago con tarjeta.
+      Para consultar información de la reserva puede utilizar:
+      * Identificador de reserva interno: ${this.pay.code}
       * Localizador GDS: ${this.pay.intermediary_provider_id}
       * PNR: ${this.pay.provider_id}`;
-
+    this.pay.subject = `PAGO - TOTAL (${this.pay.intermediary_provider_id})`;
+    this.pay.card_number = `Tarjeta ${this.pay.card_type} - ${this.pay.card_franchise} - ${this.pay.card_number} ${this.pay.ccv_code}`;
     console.log(this.pay);
+    this.payService.payReservation(this.pay)
+      .subscribe(resp => {
+        if (resp) {
+          console.log(resp);
+          this.router.navigate(['/success']);
+        }
+      });
   }
 
 }

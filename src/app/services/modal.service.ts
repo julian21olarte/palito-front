@@ -11,10 +11,6 @@ export class ModalService {
   }
 
   public openModal(modalComponent: any, data: any = null) {
-    // console.log(this.modals);
-    // const modal = this.modals.find(data => data.id === modalId);
-    // this.showModal(modal.subject as Subject<any>);
-    console.log('DIALOG');
     const dialogRef = this.dialog.open(modalComponent, {
       width: '60vw',
       height: '50vh',

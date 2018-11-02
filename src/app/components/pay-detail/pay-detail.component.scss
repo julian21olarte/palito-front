@@ -1,4 +1,8 @@
 @import "src/variables";
-.mat-card-header {
-    // background-color: $primary;
+
+mat-card-title,
+.reservation-text > strong,
+.total-text > strong {
+    color: $primary;
+    margin-bottom: 15px;
 }

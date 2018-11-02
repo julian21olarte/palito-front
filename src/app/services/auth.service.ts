@@ -1,9 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Auth0Service } from 'ngx-auth0';
-import {first, map, catchError} from 'rxjs/operators';
 import * as Auth0 from 'auth0-js';
-import { of, BehaviorSubject, Observable } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -17,7 +15,8 @@ export class AuthService {
   private currentUserObservable: BehaviorSubject<any>;
   private auth0Service: any;
   constructor(public router: Router) {
-    this.currentUserObservable = new BehaviorSubject(this.currentUser);
+
+    // Auth0 config
     this.auth0Service = new Auth0.WebAuth({
       domain: environment.auth.WebAuthConfig.domain,
       clientID: environment.auth.WebAuthConfig.clientID,
@@ -25,25 +24,20 @@ export class AuthService {
       scope: environment.auth.WebAuthConfig.scope,
       redirectUri: window.location.origin
     });
+    this.currentUserObservable = new BehaviorSubject(this.currentUser);
     this.getAccessToken();
   }
 
-  public login(user: any) {
+  public login(user: any, cb: any) {
     const { username, password } = user;
-    console.log(user);
     this.auth0Service
-      .login({username, password, realm: this.auth0Connection}, function(err, resp) {
-        if (err) {
-          console.log(err);
-        }
-      });
+      .login({username, password, realm: this.auth0Connection}, cb);
   }
 
   public logout() {
     this.auth0Service.logout({
       returnTo: window.location.origin,
       clientID: environment.auth.WebAuthConfig.clientID,
-      // client_id: environment.auth.WebAuthConfig.clientID
     });
     this.setCurrentUser(null);
     localStorage.removeItem('access_token');
@@ -53,14 +47,15 @@ export class AuthService {
 
   getAccessToken() {
     const accesToken = localStorage.getItem('access_token');
-    if (accesToken) {
-      this.setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+    const expires_at = localStorage.getItem('expires_at');
+    const profile = localStorage.getItem('currentUser');
+
+    if (accesToken && profile && expires_at && parseInt(expires_at, 10) >= (new Date()).getTime()) {
+      this.setCurrentUser(JSON.parse(profile));
     } else {
       this.auth0Service.checkSession({}, (err, authResult) => {
         if (err) {
-          console.log(err);
         } else if (authResult && authResult.accessToken && authResult.idToken) {
-          console.log(authResult.accessToken);
           this.getUserInfo(authResult);
         }
       });
@@ -71,7 +66,6 @@ export class AuthService {
       if (profile) {
         this.setCurrentUser(profile);
         this.setSession(authResult, profile);
-        console.log(profile);
       }
     });
   }
