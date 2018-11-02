@@ -9,7 +9,7 @@ export const environment = {
       // scope: 'openid profile email'
     },
     connection: 'Username-Password-Authentication',
-    api: 'http://localhost:3000/',
-    api_domain: 'localhost:3000'
+    api: 'https://palito-back.herokuapp.com/',
+    api_domain: 'palito-back.herokuapp.com'
   }
 };
