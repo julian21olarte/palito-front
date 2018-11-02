@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class PayTransferFormComponent implements OnInit {
 
   @Input() reservation: Reservation;
-  private pay: PayTransfer;
-  private conditions: boolean;
+  public pay: PayTransfer;
+  public conditions: boolean;
   constructor(private payService: PayService, private router: Router) {
     this.conditions = false;
   }

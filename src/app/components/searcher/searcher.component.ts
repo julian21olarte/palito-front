@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 export class SearcherComponent implements OnInit {
 
   public reservationCode: string;
-  private errorMessage: any;
+  public errorMessage: any;
   constructor(public reservationService: ReservationService, private router: Router) {
     this.reservationCode = '';
     this.errorMessage = {

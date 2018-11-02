@@ -10,7 +10,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class ModalLoginComponent implements OnInit {
 
-  private modalId: string;
+  public modalId: string;
   @ViewChild('modalLogin') modal: any;
   constructor(
     private modalService: ModalService,

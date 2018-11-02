@@ -10,7 +10,7 @@ import { Reservation } from 'src/app/interfaces/reservation.interface';
 })
 export class PayerComponent implements OnInit {
 
-  private reservation: Reservation;
+  public reservation: Reservation;
   public pay: any;
   constructor(private reservationService: ReservationService, private router: Router) {
     this.reservation = this.reservationService.getCurrentReservation();

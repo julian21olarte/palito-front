@@ -14,10 +14,10 @@ import { Router } from '@angular/router';
 export class PayCardFormComponent implements OnInit {
 
   @Input() reservation: Reservation;
-  private pay: PayCard;
-  private hide: boolean;
-  private hideCCV: boolean;
-  private conditions: boolean;
+  public pay: PayCard;
+  public hide: boolean;
+  public hideCCV: boolean;
+  public conditions: boolean;
   constructor(private payService: PayService, private router: Router) {
     this.hide = this.hideCCV = true;
     this.conditions = false;

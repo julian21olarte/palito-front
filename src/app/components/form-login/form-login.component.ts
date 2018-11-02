@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class FormLoginComponent implements OnInit {
 
   public user: any;
-  private hide: boolean;
-  private errorMessage: any;
+  public hide: boolean;
+  public errorMessage: any;
   constructor(public authService: AuthService, public router: Router) {
     this.errorMessage = {
       error: false,

@@ -10,7 +10,7 @@ import { ModalLoginComponent } from '../modal-login/modal-login.component';
 })
 export class HeaderComponent implements OnInit {
 
-  private currentUser: any;
+  public currentUser: any;
   @ViewChild('modalLogin') modalLogin: any;
   constructor(private modalService: ModalService, private authService: AuthService) { }
 
