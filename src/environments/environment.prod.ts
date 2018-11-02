@@ -8,8 +8,8 @@ export const environment = {
       responseType: 'token id_token'
       // scope: 'openid profile email'
     },
-    connection: 'Username-Password-Authentication',
-    api: 'https://palito-back.herokuapp.com/',
-    api_domain: 'palito-back.herokuapp.com'
-  }
+    connection: 'Username-Password-Authentication'
+  },
+  api: 'https://palito-back.herokuapp.com/',
+  api_domain: 'palito-back.herokuapp.com'
 };
