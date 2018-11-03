@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as Auth0 from 'auth0-js';
 import { of, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
   private currentUser: any;
   private currentUserObservable: BehaviorSubject<any>;
   private auth0Service: any;
-  constructor(public router: Router) {
+  constructor(public router: Router, public http: HttpClient) {
 
     // Auth0 config
     this.auth0Service = new Auth0.WebAuth({
@@ -54,8 +54,7 @@ export class AuthService {
       this.setCurrentUser(JSON.parse(profile));
     } else {
       this.auth0Service.checkSession({}, (err, authResult) => {
-        if (err) {
-        } else if (authResult && authResult.accessToken && authResult.idToken) {
+        if (!err && authResult && authResult.accessToken && authResult.idToken) {
           this.getUserInfo(authResult);
         }
       });

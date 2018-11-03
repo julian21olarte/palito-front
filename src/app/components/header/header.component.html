@@ -6,7 +6,7 @@
 
     <button mat-button routerLink="/flights"><mat-icon>flight</mat-icon> Vuelos</button>
     <button mat-button routerLink="/packages"><mat-icon>attach_money</mat-icon> Cotizar paquetes</button>
-    <button mat-button (click)="openLoginModal();" *ngIf="!currentUser"><mat-icon>person</mat-icon> Login</button>
+    <button mat-button (click)="openLoginModal();" *ngIf="!currentUser"><mat-icon>person</mat-icon> Entrar</button>
     <div *ngIf="currentUser">
         <button mat-button [matMenuTriggerFor]="menu">
             <img class="img-round" width="32" height="32" src="{{currentUser.picture}}" alt="user-img"> <span class="user_data"> {{currentUser.nickname}}</span>
@@ -14,7 +14,7 @@
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click) = "logout();">
                 <mat-icon>exit_to_app</mat-icon>
-                <span>Logout</span>
+                <span>Salir</span>
             </button>
         </mat-menu>
     </div>

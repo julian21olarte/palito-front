@@ -1,21 +1,21 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
   <mat-card>
       <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>Iniciar Sesion</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <form #form="ngForm">
           <mat-form-field>
-            <input matInput placeholder="Username" required name="username" [(ngModel)]="user.username">
+            <input matInput placeholder="Usuario" required name="username" [(ngModel)]="user.username">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Password" required name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
+            <input matInput placeholder="Contraseña" required name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
           <span class="error" *ngIf="errorMessage.error">{{errorMessage.message}}</span>
           <div class="button-row">
-            <button mat-raised-button color="primary" (click)="loginUser()" [disabled] = "form.invalid">Login</button>
+            <button mat-raised-button color="primary" (click)="loginUser()" [disabled] = "form.invalid">Iniciar Sesion</button>
           </div>
         </form>
       </mat-card-content>

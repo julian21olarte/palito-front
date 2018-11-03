@@ -1,3 +1,4 @@
+import { ProgressService } from 'src/app/services/progress.service';
 import { PayTransfer } from './../../interfaces/pay-transfer.interface';
 import { Pay } from './../../interfaces/pay.interface';
 import { Component, OnInit, Input } from '@angular/core';
@@ -15,7 +16,7 @@ export class PayTransferFormComponent implements OnInit {
   @Input() reservation: Reservation;
   public pay: PayTransfer;
   public conditions: boolean;
-  constructor(private payService: PayService, private router: Router) {
+  constructor(private payService: PayService, private router: Router, public progressService: ProgressService) {
     this.conditions = false;
   }
 
@@ -43,6 +44,7 @@ export class PayTransferFormComponent implements OnInit {
   }
 
   public sendPay() {
+    this.progressService.showProgressBar();
     this.pay.pay_date = new Date();
     this.pay.description =
     `La siguiente reserva fue pagada y requiere que procese el pago con tarjeta.
@@ -56,6 +58,7 @@ export class PayTransferFormComponent implements OnInit {
       .subscribe(resp => {
         if (resp) {
           console.log(resp);
+          this.progressService.hideProgressBar();
           this.router.navigate(['/success']);
         }
       });

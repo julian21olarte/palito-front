@@ -1,3 +1,4 @@
+import { ProgressService } from 'src/app/services/progress.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   public currentUser: any;
   @ViewChild('modalLogin') modalLogin: any;
-  constructor(private modalService: ModalService, private authService: AuthService) { }
+  constructor(private modalService: ModalService, private authService: AuthService, public progressService: ProgressService) { }
 
   ngOnInit() {
     this.authService.getCurrentUser()
@@ -28,7 +29,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
+    this.progressService.showProgressBar();
     this.authService.logout();
+      // .subscribe(resp => this.progressService.showProgressBar());
   }
 
 }

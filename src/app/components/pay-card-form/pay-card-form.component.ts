@@ -1,3 +1,4 @@
+import { ProgressService } from './../../services/progress.service';
 import { PayService } from './../../services/pay.service';
 import { Subject } from 'rxjs';
 import { PayCard } from './../../interfaces/pay-card.interface';
@@ -18,7 +19,7 @@ export class PayCardFormComponent implements OnInit {
   public hide: boolean;
   public hideCCV: boolean;
   public conditions: boolean;
-  constructor(private payService: PayService, private router: Router) {
+  constructor(private payService: PayService, private router: Router, public progressService: ProgressService) {
     this.hide = this.hideCCV = true;
     this.conditions = false;
   }
@@ -52,6 +53,7 @@ export class PayCardFormComponent implements OnInit {
   }
 
   public sendPay() {
+    this.progressService.showProgressBar();
     this.pay.pay_date = new Date();
     this.pay.description =
     `La siguiente reserva fue pagada y requiere que procese el pago con tarjeta.
@@ -66,6 +68,7 @@ export class PayCardFormComponent implements OnInit {
       .subscribe(resp => {
         if (resp) {
           console.log(resp);
+          this.progressService.hideProgressBar();
           this.router.navigate(['/success']);
         }
       });

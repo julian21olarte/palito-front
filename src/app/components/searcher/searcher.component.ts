@@ -1,3 +1,4 @@
+import { ProgressService } from './../../services/progress.service';
 import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from 'src/app/services/reservation.service';
@@ -13,7 +14,7 @@ export class SearcherComponent implements OnInit {
 
   public reservationCode: string;
   public errorMessage: any;
-  constructor(public reservationService: ReservationService, private router: Router) {
+  constructor(public reservationService: ReservationService, private router: Router, public progressService: ProgressService) {
     this.reservationCode = '';
     this.errorMessage = {
       error: true,
@@ -25,6 +26,7 @@ export class SearcherComponent implements OnInit {
   }
 
   public getReservation() {
+    this.progressService.showProgressBar();
     this.reservationService.getReservationByCode(this.reservationCode)
       .pipe(
         catchError(error => {
@@ -32,10 +34,11 @@ export class SearcherComponent implements OnInit {
         })
       )
       .subscribe(reservation => {
+        this.progressService.hideProgressBar();
         if (reservation) {
           if (!reservation.ok && reservation.status === 404) {
             this.errorMessage.error = true;
-            this.errorMessage.message = reservation.error.message;
+            this.errorMessage.message = 'No se encontra ningun pedido con el codigo: ' + this.reservationCode;
           } else {
             this.reservationService.setCurrentReservation(reservation);
             this.router.navigate(['/payer']);
