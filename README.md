@@ -14,6 +14,6 @@ Frontend for Palito fullstack M&M Travel test (Angular 6+).
 
 ## Deploy
 ```
-1. Execute `npm start` or `ng serve`.
+1. Execute `ng serve --open`.
 ```
 > Default port is `4200`.
